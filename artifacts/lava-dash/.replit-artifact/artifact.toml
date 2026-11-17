@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "LAVA DASH"
+description = "A playable Three.js endless runner for the На LAVAше restaurant, with a 3D shawarma mascot, mobile controls, collectibles, obstacles, saved high scores, and a direct order link."
+version = "1.0.0"
+id = "artifacts/lava-dash"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25361
+
+[services.development]
+run = "pnpm --filter @workspace/lava-dash run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lava-dash", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/lava-dash/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25361"
+BASE_PATH = "/"
