@@ -1,36 +1,36 @@
-# [Project name]
+# LAVA DASH
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+LAVA DASH is a playable Three.js endless runner for the «На LAVAше» restaurant, with a 3D shawarma hero, mobile controls, and a restaurant-order link.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/lava-dash run dev` — run the game in development
+- `pnpm --filter @workspace/lava-dash run build` — build the game
+- `pnpm --filter @workspace/lava-dash run typecheck` — check the web app types
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- pnpm workspaces, Node.js 24, React, Vite, Three.js
+- Three.js creates the city, shawarma mascot, obstacles, and collectible models in the browser
+- Browser localStorage stores the best score; the game has no API or database dependency
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/lava-dash/src/App.tsx` — Russian game menu, HUD, help, pause, and game-over screens
+- `artifacts/lava-dash/src/game/` — scene, world, player, controls, collisions, collectibles, obstacles, sound, and score storage
+- `artifacts/lava-dash/src/index.css` — responsive game interface
+- `artifacts/lava-dash/index.html` — Russian page metadata and social preview text
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Keep game rules in small JavaScript modules so the temporary geometry mascot can later be replaced with a GLB/GLTF model.
+- Never create or award promo codes in the browser; future offers must come from a server-side verification flow.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Players run through a colorful three-lane city, dodge hazards, collect food for points, save their best score, and can open the restaurant’s order page.
 
 ## User preferences
 
@@ -42,4 +42,4 @@ _Populate as you build — sharp edges, "always run X before Y" rules._
 
 ## Pointers
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
